@@ -246,6 +246,7 @@ func (w *waiter) daemonSetReady(ds *appsv1.DaemonSet) bool {
 // function to support the v1beta1 types
 func (w *waiter) crdBetaReady(crd apiextv1beta1.CustomResourceDefinition) bool {
 	for _, cond := range crd.Status.Conditions {
+		w.log("condition for the crd %s: %#v", crd.Name, cond)
 		switch cond.Type {
 		case apiextv1beta1.Established:
 			if cond.Status == apiextv1beta1.ConditionTrue {
